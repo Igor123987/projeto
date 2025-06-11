@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burguer do Zé - São João</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: black;
+    }
+    .bg-festa {
+      background-color: #000;
+    }
+  </style>
+</head>
+<body class="text-white font-sans">
+
+  <header class="flex justify-between items-center p-4 bg-festa border-b border-yellow-400">
+    <h1 class="text-2xl font-bold text-yellow-400">🎉 Hamburgueria Sabor da Terra - São João 🎊</h1>
+  </header>
+
+  <section class="text-center py-10 px-4 bg-festa">
+    <h2 class="text-4xl font-bold mb-4 text-yellow-300">O hambúrguer mais arretado do São João! 🍔🔥</h2>
+    <p class="text-lg mb-6">Sabores que dançam quadrilha no seu paladar!</p>
+    <a href="#cardapio" class="bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold">Ver Cardápio</a>
+  </section>
+
+  <section class="bg-festa py-10 px-4">
+    <div class="max-w-2xl mx-auto">
+      <h3 class="text-3xl font-bold mb-4 text-yellow-400">Sobre Nós</h3>
+      <p>
+        A Hamburgueria Sabor da Terra entrou no clima do São João com um cardápio especial pra você se esbaldar! Hambúrguer artesanal com gostinho de festa junina, direto da chapa para o seu arraial!
+      </p>
+    </div>
+  </section>
+
+  <section id="cardapio" class="py-10 px-4 bg-festa">
+    <div class="max-w-4xl mx-auto">
+      <h3 class="text-3xl font-bold mb-6 text-yellow-400">Nosso Cardápio Junino</h3>
+      <form id="pedidoForm">
+        <div id="produtos" class="grid md:grid-cols-2 gap-6 mb-6"></div>
+        <h4 class="text-2xl font-bold mb-4 text-yellow-400">Bebidas</h4>
+        <div id="bebidas" class="grid md:grid-cols-2 gap-6 mb-6"></div>
+        <button type="submit" class="bg-yellow-400 text-black font-bold px-6 py-3 rounded-xl">Fazer Pedido</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="bg-festa py-10 px-4">
+    <div class="max-w-2xl mx-auto text-center">
+      <h3 class="text-3xl font-bold mb-4 text-yellow-400">Onde Estamos</h3>
+      <p>📍 Minha casa, (Ass. São Luiz)</p>
+      <p>🕐 Terça a domingo, das 18h às 23h</p>
+      <a href="https://wa.me/5589999123153" target="_blank" class="inline-block mt-4 bg-yellow-400 text-black px-4 py-2 rounded-xl font-semibold">Pedir pelo WhatsApp</a>
+    </div>
+  </section>
+
+  <footer class="text-center py-6 bg-festa text-sm border-t border-yellow-400">
+    © 2025 HAMBURGUERIA SABOR DA TERRA. Viva São João! 🎆
+  </footer>
+
+  <script>
+    const produtos = [
+      { nome: "Classico", descricao: "Pão de hambúrguer, carne, alface, tomate, queijo, presunto, molho especial.", preco: 8.00 },
+      { nome: "Egg Burquer", descricao: "Pão de hambúrguer, carne, ovo, alface, tomate, queijo, presunto, molho especial.", preco: 10.00 },
+      { nome: "Bacon Burquer", descricao: "Pão de hambúrguer, carne, bacon, queijo, presunto, alface, tomate, cebolas caramelizadas, molho especial.", preco: 14.00 },
+      { nome: "Duplo Cheese", descricao: "Pão de hambúrguer, carne X2, queijo X2, presunto, alface, tomate, cebola caramelizada, molho especial.", preco: 16.00 },
+      { nome: "X-Tudo", descricao: "Pão de hambúrguer, carne, ovo, bacon, queijo, presunto, alface, tomate, cebola caramelizada, molho especial.", preco: 18.00 },
+      { nome: "Classic Grill", descricao: "Pão tradicional, carne bovino 125g, alface, tomate, molho barbecue, queijo.", preco: 15.00 },
+      { nome: "X-Salada Gormt.", descricao: "Pão, carne bovino 125g, alface, tomate, queijo, cebola roxa, molho verde, molho especial.", preco: 16.00 },
+      { nome: "X-Bacon Art.", descricao: "Pão, carne bovino 125g, bacon, alface, molho barbecue, tomate, queijo, presunto, cebolas caramelizadas.", preco: 18.00 }
+    ];
+
+    const bebidas = [
+      { nome: "Pitulinha", preco: 2.50 },
+      { nome: "Banana com Leite", preco: 7.00 },
+      { nome: "Goiabada com Leite", preco: 7.00 }
+    ];
+
+    const containerProdutos = document.getElementById("produtos");
+    const containerBebidas = document.getElementById("bebidas");
+
+    produtos.forEach((produto, i) => {
+      const div = document.createElement("div");
+      div.className = "bg-black p-4 rounded-xl border border-yellow-400 text-white";
+      div.innerHTML = `
+        <label class="block">
+          <input type="checkbox" class="mr-2 produto-check" data-index="${i}">
+          <span class="text-yellow-400 font-bold">${produto.nome}</span>
+        </label>
+        <p class="text-sm">${produto.descricao}</p>
+        <span class="block mt-1 text-yellow-300 font-bold">R$ ${produto.preco.toFixed(2)}</span>
+        <label class="block mt-2 text-sm">Quantidade:
+          <input type="number" min="1" value="1" class="qtd-produto mt-1 px-2 py-1 rounded text-black" data-index="${i}" disabled>
+        </label>
+      `;
+      containerProdutos.appendChild(div);
+    });
+
+    bebidas.forEach((bebida, i) => {
+      const div = document.createElement("div");
+      div.className = "bg-black p-4 rounded-xl border border-yellow-400 text-white";
+      div.innerHTML = `
+        <label class="block">
+          <input type="checkbox" class="mr-2 bebida-check" data-index="${i}">
+          <span class="text-yellow-400 font-bold">${bebida.nome}</span>
+        </label>
+        <span class="block mt-1 text-yellow-300 font-bold">R$ ${bebida.preco.toFixed(2)}</span>
+        <label class="block mt-2 text-sm">Quantidade:
+          <input type="number" min="1" value="1" class="qtd-bebida mt-1 px-2 py-1 rounded text-black" data-index="${i}" disabled>
+        </label>
+      `;
+      containerBebidas.appendChild(div);
+    });
+
+    document.querySelectorAll(".produto-check").forEach(cb => {
+      cb.addEventListener("change", e => {
+        const index = e.target.dataset.index;
+        document.querySelector(`.qtd-produto[data-index="${index}"]`).disabled = !e.target.checked;
+      });
+    });
+
+    document.querySelectorAll(".bebida-check").forEach(cb => {
+      cb.addEventListener("change", e => {
+        const index = e.target.dataset.index;
+        document.querySelector(`.qtd-bebida[data-index="${index}"]`).disabled = !e.target.checked;
+      });
+    });
+
+    document.getElementById("pedidoForm").addEventListener("submit", e => {
+      e.preventDefault();
+      let mensagem = "Olá! Quero fazer o seguinte pedido:";
+
+      produtos.forEach((produto, i) => {
+        const checked = document.querySelector(`.produto-check[data-index="${i}"]`).checked;
+        const qtd = parseInt(document.querySelector(`.qtd-produto[data-index="${i}"]`).value);
+        if (checked && qtd > 0) {
+          mensagem += ` ${qtd}x ${produto.nome} (R$${produto.preco.toFixed(2)})%0A`;
+        }
+      });
+
+      bebidas.forEach((bebida, i) => {
+        const checked = document.querySelector(`.bebida-check[data-index="${i}"]`).checked;
+        const qtd = parseInt(document.querySelector(`.qtd-bebida[data-index="${i}"]`).value);
+        if (checked && qtd > 0) {
+          mensagem += ` ${qtd}x ${bebida.nome} (R$${bebida.preco.toFixed(2)})%0A`;
+        }
+      });
+
+      mensagem += "%0AObrigado!";
+      const url = `https://wa.me/5589999123153?text=${mensagem}`;
+      window.open(url, "_blank");
+    });
+  </script>
+</body>
+</html>
